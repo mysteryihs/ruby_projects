@@ -1,5 +1,21 @@
 class MasterMind
 	def initialize
+		puts 'Do you want to guess the code? (Y/N)'
+		response = gets.chomp
+		if response.downcase == 'y'
+			initialize_player
+		elsif response.downcase == 'n'
+			initialize_computer
+		else
+			puts "I don't understand."
+		end
+	end
+
+	def initialize_computer
+		puts 'Choose 4 of the 6 colors: Red, Green, Blue, Yellow, White and Black.'
+	end
+
+	def initialize_player
 		puts 'Choose 4 of the 6 colors: Red, Green, Blue, Yellow, White and Black.'
 		@list_of_colors = ['red', 'green', 'blue', 'yellow', 'white', 'black']
 		@in_play = true
@@ -17,29 +33,25 @@ class MasterMind
 		puts "You lose. The answer was #{@secret_key}"
 	end
 
-
+	def guess_checker(attempt)
+		valid_answer = false
+		until valid_answer == true && attempt.length == 4
+			if (attempt.all? {|x| @list_of_colors.include?(x)}) && (attempt.length == 4)
+				valid_answer = true
+			else
+				valid_answer = false
+				puts 'Please choose EXACTLY 4 of the 6 colors: Red, Green, Blue, Yellow, White and Black'
+				input = gets.chomp
+				attempt = input.downcase.split
+			end
+		end
+		return attempt
+	end
 
 	def guess
 		input = gets.chomp
 		attempt = input.downcase.split
-		until attempt.length == 4
-			puts 'Please guess exactly 4 colors.'
-			input = gets.chomp
-			attempt = input.downcase.split
-		end
-		valid_answer = 0
-		until valid_answer >= 4
-			attempt.each do |x|
-				if @list_of_colors.include? x.downcase
-					valid_answer += 1
-				else
-					puts 'Please hoose 4 of the 6 colors: Red, Green, Blue, Yellow, White and Black.'
-					input = gets.chomp
-					attempt = input.downcase.split
-				end
-			end
-		end
-
+		attempt_final = guess_checker(attempt)
 		secret_key_clone = @secret_key.dup
 		right = 0
 		sorta_right = 0
