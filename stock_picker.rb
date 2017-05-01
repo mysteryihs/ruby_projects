@@ -3,8 +3,6 @@ def stock_picker(stock_list)
 	max_profit = 0
 	buyday = 0
 	sellday = 0
-	#stock_list[0..-2] is for the last day where you cannot buy.
-	#stock_list[index + 1..stock_list.length + 1] is for the first day where you cannot sell.
 	stock_list[0..-2].each_with_index do |value, index|
 		stock_list[index + 1..stock_list.length + 1].each do |i|
 			list_of_values << i - stock_list[index]
