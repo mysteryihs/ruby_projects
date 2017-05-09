@@ -9,3 +9,5 @@ Substrings: Program that takes a dictionary and a word and lists how many times 
 Bubble sort: Program using the bubble sort algorithm to sort an array from smallest to biggest.
 
 module Enumerables: Rebuilt the commonly used methods of Ruby such as #each, #each_with_index, #select, ... #map, and #inject.
+
+This repository also includes solutions Cracking the Coding interview for chapters 1-4 (arrays and strings, linked lists, stacks and queues, and BST)
